@@ -28,7 +28,8 @@ namespace DataAccess.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Date = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    StartDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    FinishDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UnitId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -50,6 +51,7 @@ namespace DataAccess.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Title = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Date = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UnitId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -92,7 +94,8 @@ namespace DataAccess.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Date = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    StartDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    FinishDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Image = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     UnitId = table.Column<int>(type: "int", nullable: false)
                 },
@@ -113,8 +116,17 @@ namespace DataAccess.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Calorie = table.Column<int>(type: "int", nullable: false),
+                    Soup = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    SoupCalorie = table.Column<int>(type: "int", nullable: false),
+                    FirstMainCourse = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    FirstMainCalorie = table.Column<int>(type: "int", nullable: false),
+                    SecondMainCourse = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    SecondMainCalorie = table.Column<int>(type: "int", nullable: false),
+                    VegetableCourse = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    VegetableCalorie = table.Column<int>(type: "int", nullable: false),
+                    Other = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    OtherCalorie = table.Column<int>(type: "int", nullable: false),
+                    TotalCalorie = table.Column<int>(type: "int", nullable: false),
                     Date = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UnitId = table.Column<int>(type: "int", nullable: false)
                 },
@@ -135,6 +147,7 @@ namespace DataAccess.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Title = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Date = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -174,47 +187,65 @@ namespace DataAccess.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Sliders",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Image = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    UnitId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Sliders", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Sliders_Units_UnitId",
+                        column: x => x.UnitId,
+                        principalTable: "Units",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_AcademicCalenders_UnitId",
                 table: "AcademicCalenders",
-                column: "UnitId",
-                unique: true);
+                column: "UnitId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Announcements_UnitId",
                 table: "Announcements",
-                column: "UnitId",
-                unique: true);
+                column: "UnitId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Contacts_UnitId",
                 table: "Contacts",
-                column: "UnitId",
-                unique: true);
+                column: "UnitId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Events_UnitId",
                 table: "Events",
-                column: "UnitId",
-                unique: true);
+                column: "UnitId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Foods_UnitId",
                 table: "Foods",
-                column: "UnitId",
-                unique: true);
+                column: "UnitId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Messages_UnitId",
                 table: "Messages",
-                column: "UnitId",
-                unique: true);
+                column: "UnitId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Reports_UnitId",
                 table: "Reports",
-                column: "UnitId",
-                unique: true);
+                column: "UnitId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Sliders_UnitId",
+                table: "Sliders",
+                column: "UnitId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -239,6 +270,9 @@ namespace DataAccess.Migrations
 
             migrationBuilder.DropTable(
                 name: "Reports");
+
+            migrationBuilder.DropTable(
+                name: "Sliders");
 
             migrationBuilder.DropTable(
                 name: "Units");

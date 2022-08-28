@@ -40,6 +40,9 @@ namespace Business.DependcyResolvers.Autofac
             builder.RegisterType<ReportManager>().As<IReportService>();
             builder.RegisterType<EfReportDal>().As<IReportDal>();
 
+            builder.RegisterType<SliderManager>().As<ISliderService>();
+            builder.RegisterType<EfSliderDal>().As<ISliderDal>();
+
             builder.RegisterType<UnitManager>().As<IUnitService>();
             builder.RegisterType<EfUnitDal>().As<IUnitDal>();
 

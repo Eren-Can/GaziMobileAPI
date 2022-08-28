@@ -20,6 +20,7 @@ namespace Entities.Concrete.Context
         public DbSet<Food> Foods { get; set; }
         public DbSet<Message> Messages { get; set; }
         public DbSet<Report> Reports { get; set; }
+        public DbSet<Slider> Sliders { get; set; }
         public DbSet<Unit> Units { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

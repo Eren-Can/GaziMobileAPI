@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccess.Migrations
 {
     [DbContext(typeof(GaziMobileContext))]
-    [Migration("20220726203226_first")]
+    [Migration("20220828115433_first")]
     partial class first
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -28,19 +28,21 @@ namespace DataAccess.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("datetime2");
-
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("FinishDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("StartDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<int>("UnitId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UnitId")
-                        .IsUnique();
+                    b.HasIndex("UnitId");
 
                     b.ToTable("AcademicCalenders");
                 });
@@ -51,6 +53,9 @@ namespace DataAccess.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
@@ -63,8 +68,7 @@ namespace DataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UnitId")
-                        .IsUnique();
+                    b.HasIndex("UnitId");
 
                     b.ToTable("Announcements");
                 });
@@ -90,8 +94,7 @@ namespace DataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UnitId")
-                        .IsUnique();
+                    b.HasIndex("UnitId");
 
                     b.ToTable("Contacts");
                 });
@@ -103,22 +106,24 @@ namespace DataAccess.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("datetime2");
-
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<DateTime>("FinishDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Image")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("StartDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<int>("UnitId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UnitId")
-                        .IsUnique();
+                    b.HasIndex("UnitId");
 
                     b.ToTable("Events");
                 });
@@ -130,22 +135,48 @@ namespace DataAccess.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("Calorie")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Name")
+                    b.Property<int>("FirstMainCalorie")
+                        .HasColumnType("int");
+
+                    b.Property<string>("FirstMainCourse")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Other")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("OtherCalorie")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SecondMainCalorie")
+                        .HasColumnType("int");
+
+                    b.Property<string>("SecondMainCourse")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Soup")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("SoupCalorie")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TotalCalorie")
+                        .HasColumnType("int");
 
                     b.Property<int>("UnitId")
                         .HasColumnType("int");
 
+                    b.Property<int>("VegetableCalorie")
+                        .HasColumnType("int");
+
+                    b.Property<string>("VegetableCourse")
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("UnitId")
-                        .IsUnique();
+                    b.HasIndex("UnitId");
 
                     b.ToTable("Foods");
                 });
@@ -163,6 +194,9 @@ namespace DataAccess.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Title")
                         .HasColumnType("nvarchar(max)");
 
@@ -171,8 +205,7 @@ namespace DataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UnitId")
-                        .IsUnique();
+                    b.HasIndex("UnitId");
 
                     b.ToTable("Messages");
                 });
@@ -201,10 +234,29 @@ namespace DataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UnitId")
-                        .IsUnique();
+                    b.HasIndex("UnitId");
 
                     b.ToTable("Reports");
+                });
+
+            modelBuilder.Entity("Entities.Concrete.Slider", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Image")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("UnitId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UnitId");
+
+                    b.ToTable("Sliders");
                 });
 
             modelBuilder.Entity("Entities.Concrete.Unit", b =>
@@ -228,8 +280,8 @@ namespace DataAccess.Migrations
             modelBuilder.Entity("Entities.Concrete.AcademicCalender", b =>
                 {
                     b.HasOne("Entities.Concrete.Unit", "Unit")
-                        .WithOne("AcademicCalender")
-                        .HasForeignKey("Entities.Concrete.AcademicCalender", "UnitId")
+                        .WithMany("AcademicCalenders")
+                        .HasForeignKey("UnitId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -239,8 +291,8 @@ namespace DataAccess.Migrations
             modelBuilder.Entity("Entities.Concrete.Announcement", b =>
                 {
                     b.HasOne("Entities.Concrete.Unit", "Unit")
-                        .WithOne("Announcement")
-                        .HasForeignKey("Entities.Concrete.Announcement", "UnitId")
+                        .WithMany("Announcements")
+                        .HasForeignKey("UnitId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -250,8 +302,8 @@ namespace DataAccess.Migrations
             modelBuilder.Entity("Entities.Concrete.Contact", b =>
                 {
                     b.HasOne("Entities.Concrete.Unit", "Unit")
-                        .WithOne("Contact")
-                        .HasForeignKey("Entities.Concrete.Contact", "UnitId")
+                        .WithMany("Contacts")
+                        .HasForeignKey("UnitId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -261,8 +313,8 @@ namespace DataAccess.Migrations
             modelBuilder.Entity("Entities.Concrete.Event", b =>
                 {
                     b.HasOne("Entities.Concrete.Unit", "Unit")
-                        .WithOne("Event")
-                        .HasForeignKey("Entities.Concrete.Event", "UnitId")
+                        .WithMany("Events")
+                        .HasForeignKey("UnitId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -272,8 +324,8 @@ namespace DataAccess.Migrations
             modelBuilder.Entity("Entities.Concrete.Food", b =>
                 {
                     b.HasOne("Entities.Concrete.Unit", "Unit")
-                        .WithOne("Food")
-                        .HasForeignKey("Entities.Concrete.Food", "UnitId")
+                        .WithMany("Foods")
+                        .HasForeignKey("UnitId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -283,8 +335,8 @@ namespace DataAccess.Migrations
             modelBuilder.Entity("Entities.Concrete.Message", b =>
                 {
                     b.HasOne("Entities.Concrete.Unit", "Unit")
-                        .WithOne("Message")
-                        .HasForeignKey("Entities.Concrete.Message", "UnitId")
+                        .WithMany("Messages")
+                        .HasForeignKey("UnitId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -294,8 +346,19 @@ namespace DataAccess.Migrations
             modelBuilder.Entity("Entities.Concrete.Report", b =>
                 {
                     b.HasOne("Entities.Concrete.Unit", "Unit")
-                        .WithOne("Report")
-                        .HasForeignKey("Entities.Concrete.Report", "UnitId")
+                        .WithMany("Reports")
+                        .HasForeignKey("UnitId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Unit");
+                });
+
+            modelBuilder.Entity("Entities.Concrete.Slider", b =>
+                {
+                    b.HasOne("Entities.Concrete.Unit", "Unit")
+                        .WithMany("Sliders")
+                        .HasForeignKey("UnitId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -304,19 +367,21 @@ namespace DataAccess.Migrations
 
             modelBuilder.Entity("Entities.Concrete.Unit", b =>
                 {
-                    b.Navigation("AcademicCalender");
+                    b.Navigation("AcademicCalenders");
 
-                    b.Navigation("Announcement");
+                    b.Navigation("Announcements");
 
-                    b.Navigation("Contact");
+                    b.Navigation("Contacts");
 
-                    b.Navigation("Event");
+                    b.Navigation("Events");
 
-                    b.Navigation("Food");
+                    b.Navigation("Foods");
 
-                    b.Navigation("Message");
+                    b.Navigation("Messages");
 
-                    b.Navigation("Report");
+                    b.Navigation("Reports");
+
+                    b.Navigation("Sliders");
                 });
 #pragma warning restore 612, 618
         }

@@ -7,12 +7,9 @@ using System.Threading.Tasks;
 
 namespace Entities.Concrete
 {
-    public class Event : IEntity
+    public class Slider : IEntity
     {
         public int Id { get; set; }
-        public string Description { get; set; }
-        public DateTime StartDate { get; set; }
-        public DateTime FinishDate { get; set; }
         public string Image { get; set; }
         public int UnitId { get; set; }
         public Unit Unit { get; set; }

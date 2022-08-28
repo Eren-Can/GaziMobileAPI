@@ -12,13 +12,13 @@ namespace Entities.Concrete
         public int Id { get; set; }
         public int UnitCode { get; set; }
         public string UnitName { get; set; }
-        public AcademicCalender AcademicCalender { get; set; }
-        public Report Report { get; set; }
-        public Message Message { get; set; }
-        public Contact Contact { get; set; }
-        public Event Event { get; set; }
-        public Announcement Announcement { get; set; }
-        public Food Food { get; set; }
-
+        public List<AcademicCalender> AcademicCalenders { get; set; }
+        public List<Announcement> Announcements { get; set; }
+        public List<Contact> Contacts { get; set; }
+        public List<Event> Events { get; set; }
+        public List<Food> Foods { get; set; }
+        public List<Message> Messages { get; set; }
+        public List<Report> Reports { get; set; }
+        public List<Slider> Sliders { get; set; }
     }
 }
